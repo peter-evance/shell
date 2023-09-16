@@ -8,15 +8,15 @@
  */
 int custom_strlen(char *str)
 {
-    int length = 0;
-
-    if (!str)
-        return 0;
-
-    while (*str++)
-        length++;
-
-    return length;
+        int length = 0;
+    
+        if (!str)
+            return 0;
+    
+        while (*str++)
+            length++;
+    
+        return length;
 }
 
 /**
@@ -28,18 +28,18 @@ int custom_strlen(char *str)
  */
 int custom_strcmp(char *str1, char *str2)
 {
-    while (*str1 && *str2)
-    {
-        if (*str1 != *str2)
-            return (*str1 - *str2);
-        str1++;
-        str2++;
-    }
-
-    if (*str1 == *str2)
-        return 0;
-    else
-        return (*str1 < *str2 ? -1 : 1);
+        while (*str1 && *str2)
+        {
+            if (*str1 != *str2)
+                return (*str1 - *str2);
+            str1++;
+            str2++;
+        }
+    
+        if (*str1 == *str2)
+            return 0;
+        else
+            return (*str1 < *str2 ? -1 : 1);
 }
 
 /**
@@ -51,11 +51,11 @@ int custom_strcmp(char *str1, char *str2)
  */
 char *custom_starts_with(const char *haystack, const char *needle)
 {
-    while (*needle)
-        if (*needle++ != *haystack++)
-            return NULL;
-
-    return (char *)haystack;
+        while (*needle)
+            if (*needle++ != *haystack++)
+                return NULL;
+    
+        return (char *)haystack;
 }
 
 /**
@@ -67,15 +67,15 @@ char *custom_starts_with(const char *haystack, const char *needle)
  */
 char *custom_strcat(char *dest, char *src)
 {
-    char *ret = dest;
-
-    while (*dest)
-        dest++;
-
-    while (*src)
-        *dest++ = *src++;
-
-    *dest = *src;
-
-    return ret;
+        char *ret = dest;
+    
+        while (*dest)
+            dest++;
+    
+        while (*src)
+            *dest++ = *src++;
+    
+        *dest = *src;
+    
+        return ret;
 }
