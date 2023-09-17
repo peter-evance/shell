@@ -1,19 +1,19 @@
 #include "shell.h"
 
 /**
- * _erratoi - converts a string to an integer
+ * str_to_int - converts a string to an integer
  * @s: the string to be converted
  * Return: 0 if no numbers in string, converted number otherwise
  *       -1 on error
  */
-int _erratoi(char *s)
+int str_to_int(char *s)
 {
 	int i = 0;
 	unsigned long int result = 0;
 
 	if (*s == '+')
-		s++;  /* TODO: why does this make main return 255? */
-	for (i = 0;  s[i] != '\0'; i++)
+		s++;
+	for (i = 0; s[i] != '\0'; i++)
 	{
 		if (s[i] >= '0' && s[i] <= '9')
 		{
@@ -29,50 +29,47 @@ int _erratoi(char *s)
 }
 
 /**
- * print_error - prints an error message
- * @info: the parameter & return info struct
- * @estr: string containing specified error type
- * Return: 0 if no numbers in string, converted number otherwise
- *        -1 on error
+ * print_shell_error - prints an error message related to the shell
+ * @info: the shell_info structure containing error information
+ * @error_type: string containing the specified error type
  */
-void print_error(info_t *info, char *estr)
+void print_shell_error(shell_info *info, char *error_type)
 {
-	_eputs(info->fname);
-	_eputs(": ");
-	print_d(info->line_count, STDERR_FILENO);
-	_eputs(": ");
-	_eputs(info->argv[0]);
-	_eputs(": ");
-	_eputs(estr);
+	print_to_stderr(info->fname);
+	print_to_stderr(": ");
+	print_integer(info->line_count, STDERR_FILENO);
+	print_to_stderr(": ");
+	print_to_stderr(info->argv[0]);
+	print_to_stderr(": ");
+	print_to_stderr(error_type);
 }
 
 /**
- * print_d - function prints a decimal (integer) number (base 10)
- * @input: the input
- * @fd: the filedescriptor to write to
- *
+ * print_integer - prints an integer to a file descriptor
+ * @input: the integer to be printed
+ * @fd: the file descriptor to write to
  * Return: number of characters printed
  */
-int print_d(int input, int fd)
+int print_integer(int input, int fd)
 {
 	int (*__putchar)(char) = _putchar;
 	int i, count = 0;
-	unsigned int _abs_, current;
+	unsigned int absolute_value, current;
 
 	if (fd == STDERR_FILENO)
 		__putchar = _eputchar;
 	if (input < 0)
 	{
-		_abs_ = -input;
+		absolute_value = -input;
 		__putchar('-');
 		count++;
 	}
 	else
-		_abs_ = input;
-	current = _abs_;
+		absolute_value = input;
+	current = absolute_value;
 	for (i = 1000000000; i > 1; i /= 10)
 	{
-		if (_abs_ / i)
+		if (absolute_value / i)
 		{
 			__putchar('0' + current / i);
 			count++;
@@ -86,14 +83,13 @@ int print_d(int input, int fd)
 }
 
 /**
- * convert_number - converter function, a clone of itoa
- * @num: number
- * @base: base
- * @flags: argument flags
- *
- * Return: string
+ * int_to_str - converts an integer to a string
+ * @num: the integer to be converted
+ * @base: the base for conversion (e.g., 10 for decimal)
+ * @flags: conversion flags
+ * Return: string representation of the integer
  */
-char *convert_number(long int num, int base, int flags)
+char *int_to_str(long int num, int base, int flags)
 {
 	static char *array;
 	static char buffer[50];
@@ -105,13 +101,12 @@ char *convert_number(long int num, int base, int flags)
 	{
 		n = -num;
 		sign = '-';
-
 	}
 	array = flags & CONVERT_LOWERCASE ? "0123456789abcdef" : "0123456789ABCDEF";
 	ptr = &buffer[49];
 	*ptr = '\0';
 
-	do	{
+	do {
 		*--ptr = array[n % base];
 		n /= base;
 	} while (n != 0);
@@ -122,10 +117,8 @@ char *convert_number(long int num, int base, int flags)
 }
 
 /**
- * remove_comments - function replaces first instance of '#' with '\0'
+ * remove_comments - replaces the first instance of '#' with '\0'
  * @buf: address of the string to modify
- *
- * Return: Always 0;
  */
 void remove_comments(char *buf)
 {
@@ -138,4 +131,3 @@ void remove_comments(char *buf)
 			break;
 		}
 }
-
