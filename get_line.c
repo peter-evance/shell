@@ -18,7 +18,7 @@ ssize_t bufffer_chained_commands(info_t *info, char **buf, size_t *len)
 		/*free_pointer_and_nullify((void **)info->cmd_buf);*/
 		free(*buf);
 		*buf = NULL;
-		signal(SIGINT, siginthandler);
+		signal(SIGINT, sigintHandler);
 #if USE_GETLINE
 		r = getline(buf, &len_p, stdin);
 #else
@@ -157,12 +157,12 @@ int _getline(info_t *info, char **ptr, size_t *length)
 }
 
 /**
- * siginthandler - blocks ctrl-C
+ * sigintHandler - blocks ctrl-C
  * @sig_num: the signal number
  *
  * Return: void
  */
-void siginthandler(__attribute__((unused))int sig_num)
+void sigintHandler(__attribute__((unused))int sig_num)
 {
 	_puts("\n");
 	_puts("$ ");
