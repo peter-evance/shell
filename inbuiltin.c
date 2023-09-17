@@ -17,7 +17,7 @@ int _exit_shell(info_t *info)
 		if (exitcheck == -1)
 		{
 			info->status = 2;
-			print_shell_error(info, "Illegal number: ");
+			print_error(info, "Illegal number: ");
 			_print_to_stderr(info->argv[1]);
 			_write_to_stderr('\n');
 			return (1);
@@ -68,13 +68,13 @@ int _change_directory(info_t *info)
 		chdir_ret = chdir(info->argv[1]);
 	if (chdir_ret == -1)
 	{
-		print_shell_error(info, "can't cd to ");
+		print_error(info, "can't cd to ");
 		_print_to_stderr(info->argv[1]), _write_to_stderr('\n');
 	}
 	else
 	{
-		_set_environment_variable(info, "OLDPWD", _getenv(info, "PWD="));
-		_set_environment_variable(info, "PWD", getcwd(buffer, 1024));
+		_set_env(info, "OLDPWD", _getenv(info, "PWD="));
+		_set_env(info, "PWD", getcwd(buffer, 1024));
 	}
 	return (0);
 }

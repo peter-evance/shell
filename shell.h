@@ -168,7 +168,7 @@ int _shell_utilities(char *);
 
 /* toem_errors1.c */
 int _str_to_int(char *);
-void print_shell_error(info_t *, char *);
+void print_error(info_t *, char *);
 int print_integer(int, int);
 char *int_to_str(long int, int, int);
 void remove_comments(char *);
@@ -185,7 +185,7 @@ int _manage_alias(info_t *);
 /*toem_getline.c */
 ssize_t get_input(info_t *);
 int _getline(info_t *, char **, size_t *);
-void siginthandler(int);
+void sigintHandler(int);
 
 /* toem_get_information.c */
 void intialize_shell_info(info_t *);
@@ -195,14 +195,14 @@ void free_shell_info(info_t *, int);
 /* toem_environment.c */
 char *_get_environment_variable(info_t *, const char *);
 int _display_environment(info_t *);
-int _set_environment_variable(info_t *);
+int _set_env(info_t *);
 int _unset_environment_variable(info_t *);
 int intialize_environment_list(info_t *);
 
 /* toem_get_environment.c */
 char **get_environment(info_t *);
 int _remove_environment_variable(info_t *, char *);
-int _set_environment_variable(info_t *, char *, char *);
+int _set_env(info_t *, char *, char *);
 
 /* toem_shell_history.c */
 char *get_history_file(info_t *info);

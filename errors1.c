@@ -29,13 +29,13 @@ int _str_to_int(char *s)
 }
 
 /**
- * print_shell_error - prints an error message
+ * print_error - prints an error message
  * @info: the parameter & return info struct
  * @estr: string containing specified error type
  * Return: 0 if no numbers in string, converted number otherwise
  *        -1 on error
  */
-void print_shell_error(info_t *info, char *estr)
+void print_error(info_t *info, char *estr)
 {
 	_print_to_stderr(info->fname);
 	_print_to_stderr(": ");

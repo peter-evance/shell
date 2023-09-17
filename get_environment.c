@@ -50,7 +50,7 @@ int _remove_environment_variable(info_t *info, char *var)
 }
 
 /**
- * _set_environment_variable - Initialize a new environment variable,
+ * _set_env - Initialize a new environment variable,
  *             or modify an existing one
  * @info: Structure containing potential arguments. Used to maintain
  *        constant function prototype.
@@ -58,7 +58,7 @@ int _remove_environment_variable(info_t *info, char *var)
  * @value: the string env var value
  *  Return: Always 0
  */
-int _set_environment_variable(info_t *info, char *var, char *value)
+int _set_env(info_t *info, char *var, char *value)
 {
 	char *buf = NULL;
 	list_t *node;

@@ -60,7 +60,7 @@ int find_builtin(info_t *info)
 		{"env", _display_environment},
 		{"help", _display_help},
 		{"history", _display_history},
-		{"setenv", _set_environment_variable},
+		{"setenv", _set_env},
 		{"unsetenv", _unset_environment_variable},
 		{"cd", _change_directory},
 		{"alias", _manage_alias},
@@ -114,7 +114,7 @@ void find_cmd(info_t *info)
 		else if (*(info->arg) != '\n')
 		{
 			info->status = 127;
-			print_shell_error(info, "not found\n");
+			print_error(info, "not found\n");
 		}
 	}
 }
@@ -154,7 +154,7 @@ void fork_cmd(info_t *info)
 		{
 			info->status = WEXITSTATUS(info->status);
 			if (info->status == 126)
-				print_shell_error(info, "Permission denied\n");
+				print_error(info, "Permission denied\n");
 		}
 	}
 }

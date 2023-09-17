@@ -35,20 +35,20 @@ char *_get_environment_variable(info_t *info, const char *name)
 }
 
 /**
- * _set_environment_variable - Initialize a new environment variable,
+ * _set_env - Initialize a new environment variable,
  *             or modify an existing one
  * @info: Structure containing potential arguments. Used to maintain
  *        constant function prototype.
  *  Return: Always 0
  */
-int _set_environment_variable(info_t *info)
+int _set_env(info_t *info)
 {
 	if (info->argc != 3)
 	{
 		_print_to_stderr("Incorrect number of arguements\n");
 		return (1);
 	}
-	if (_set_environment_variable(info, info->argv[1], info->argv[2]))
+	if (_set_env(info, info->argv[1], info->argv[2]))
 		return (0);
 	return (1);
 }
