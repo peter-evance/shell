@@ -1,10 +1,10 @@
 #include "shell.h"
 
 /**
- * clear_info - initializes info_t struct
+ * intialize_shell_info - initializes info_t struct
  * @info: struct address
  */
-void clear_info(info_t *info)
+void intialize_shell_info(info_t *info)
 {
 	info->arg = NULL;
 	info->argv = NULL;
@@ -13,11 +13,11 @@ void clear_info(info_t *info)
 }
 
 /**
- * set_info - initializes info_t struct
+ * setup_shell_info - initializes info_t struct
  * @info: struct address
  * @av: argument vector
  */
-void set_info(info_t *info, char **av)
+void setup_shell_info(info_t *info, char **av)
 {
 	int i = 0;
 
@@ -44,13 +44,13 @@ void set_info(info_t *info, char **av)
 }
 
 /**
- * free_info - frees info_t struct fields
+ * free_shell_info - frees info_t struct fields
  * @info: struct address
  * @all: true if freeing all fields
  */
-void free_info(info_t *info, int all)
+void free_shell_info(info_t *info, int all)
 {
-	ffree(info->argv);
+	free_string_array(info->argv);
 	info->argv = NULL;
 	info->path = NULL;
 	if (all)
@@ -63,12 +63,11 @@ void free_info(info_t *info, int all)
 			free_list(&(info->history));
 		if (info->alias)
 			free_list(&(info->alias));
-		ffree(info->environ);
+		free_string_array(info->environ);
 			info->environ = NULL;
-		bfree((void **)info->cmd_buf);
+		free_pointer_and_nullify((void **)info->cmd_buf);
 		if (info->readfd > 2)
 			close(info->readfd);
 		_putchar(BUF_FLUSH);
 	}
 }
-
