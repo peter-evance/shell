@@ -195,7 +195,7 @@ void free_shell_info(info_t *, int);
 /* toem_environment.c */
 char *_get_environment_variable(info_t *, const char *);
 int _display_environment(info_t *);
-int _set_env(info_t *);
+int _initialize_environment_variable(info_t *);
 int _unset_environment_variable(info_t *);
 int intialize_environment_list(info_t *);
 
